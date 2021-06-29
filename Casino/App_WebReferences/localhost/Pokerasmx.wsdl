@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPlayerCash">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlayerCashResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPlayerCashResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addPlayer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cash" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsAI" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addPlayerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="joinPokerAISession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="joinPokerAISessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="joinPokerAISessionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="game">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="stage" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="gameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="gameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartGame">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartGameResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Fold">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="foldPlayer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastPlayer" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FoldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FoldResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CallOrRaise">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="amount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="currentCall" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="s" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CallOrRaiseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Check">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetWinner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWinnerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWinnerResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSessionCards">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSessionCardsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionCardsResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlayerCards">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlayerCardsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPlayerCardsResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsAi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsAiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsAiResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionCash">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionCashResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSessionCashResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlayerDeckNum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="player" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPlayerDeckNumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetPlayerDeckNumResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLogResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVariation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="num" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVariationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVariationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeneralHandMonim">
+        <s:complexType />
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGeneralHandMonimResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeneralHandMonimResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserHandMonim">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserHandMonimResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserHandMonimResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeneralGamesLog">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGeneralGamesLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeneralGamesLogResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserGamesLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserGamesLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserGamesLogResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CloseConnection">
+        <s:complexType />
+      </s:element>
+      <s:element name="CloseConnectionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="test">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPlayerCashSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlayerCash" />
+  </wsdl:message>
+  <wsdl:message name="GetPlayerCashSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlayerCashResponse" />
+  </wsdl:message>
+  <wsdl:message name="addPlayerSoapIn">
+    <wsdl:part name="parameters" element="tns:addPlayer" />
+  </wsdl:message>
+  <wsdl:message name="addPlayerSoapOut">
+    <wsdl:part name="parameters" element="tns:addPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="joinPokerAISessionSoapIn">
+    <wsdl:part name="parameters" element="tns:joinPokerAISession" />
+  </wsdl:message>
+  <wsdl:message name="joinPokerAISessionSoapOut">
+    <wsdl:part name="parameters" element="tns:joinPokerAISessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="gameSoapIn">
+    <wsdl:part name="parameters" element="tns:game" />
+  </wsdl:message>
+  <wsdl:message name="gameSoapOut">
+    <wsdl:part name="parameters" element="tns:gameResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartGameSoapIn">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="StartGameSoapOut">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="FoldSoapIn">
+    <wsdl:part name="parameters" element="tns:Fold" />
+  </wsdl:message>
+  <wsdl:message name="FoldSoapOut">
+    <wsdl:part name="parameters" element="tns:FoldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOrRaiseSoapIn">
+    <wsdl:part name="parameters" element="tns:CallOrRaise" />
+  </wsdl:message>
+  <wsdl:message name="CallOrRaiseSoapOut">
+    <wsdl:part name="parameters" element="tns:CallOrRaiseResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckSoapIn">
+    <wsdl:part name="parameters" element="tns:Check" />
+  </wsdl:message>
+  <wsdl:message name="CheckSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWinnerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWinner" />
+  </wsdl:message>
+  <wsdl:message name="GetWinnerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWinnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionCardsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionCards" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionCardsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlayerCardsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlayerCards" />
+  </wsdl:message>
+  <wsdl:message name="GetPlayerCardsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlayerCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsAiSoapIn">
+    <wsdl:part name="parameters" element="tns:IsAi" />
+  </wsdl:message>
+  <wsdl:message name="IsAiSoapOut">
+    <wsdl:part name="parameters" element="tns:IsAiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionCashSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionCash" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionCashSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionCashResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPlayerDeckNumSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPlayerDeckNum" />
+  </wsdl:message>
+  <wsdl:message name="GetPlayerDeckNumSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPlayerDeckNumResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLog" />
+  </wsdl:message>
+  <wsdl:message name="GetLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVariationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVariation" />
+  </wsdl:message>
+  <wsdl:message name="GetVariationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVariationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralHandMonimSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeneralHandMonim" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralHandMonimSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeneralHandMonimResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserHandMonimSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserHandMonim" />
+  </wsdl:message>
+  <wsdl:message name="GetUserHandMonimSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserHandMonimResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralGamesLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeneralGamesLog" />
+  </wsdl:message>
+  <wsdl:message name="GetGeneralGamesLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeneralGamesLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGamesLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserGamesLog" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGamesLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserGamesLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseConnection" />
+  </wsdl:message>
+  <wsdl:message name="CloseConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="testSoapIn">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="testSoapOut">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PokerasmxSoap">
+    <wsdl:operation name="GetPlayerCash">
+      <wsdl:input message="tns:GetPlayerCashSoapIn" />
+      <wsdl:output message="tns:GetPlayerCashSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addPlayer">
+      <wsdl:input message="tns:addPlayerSoapIn" />
+      <wsdl:output message="tns:addPlayerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="joinPokerAISession">
+      <wsdl:input message="tns:joinPokerAISessionSoapIn" />
+      <wsdl:output message="tns:joinPokerAISessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="game">
+      <wsdl:input message="tns:gameSoapIn" />
+      <wsdl:output message="tns:gameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input message="tns:StartGameSoapIn" />
+      <wsdl:output message="tns:StartGameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Fold">
+      <wsdl:input message="tns:FoldSoapIn" />
+      <wsdl:output message="tns:FoldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CallOrRaise">
+      <wsdl:input message="tns:CallOrRaiseSoapIn" />
+      <wsdl:output message="tns:CallOrRaiseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check">
+      <wsdl:input message="tns:CheckSoapIn" />
+      <wsdl:output message="tns:CheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWinner">
+      <wsdl:input message="tns:GetWinnerSoapIn" />
+      <wsdl:output message="tns:GetWinnerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionCards">
+      <wsdl:input message="tns:GetSessionCardsSoapIn" />
+      <wsdl:output message="tns:GetSessionCardsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerCards">
+      <wsdl:input message="tns:GetPlayerCardsSoapIn" />
+      <wsdl:output message="tns:GetPlayerCardsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAi">
+      <wsdl:input message="tns:IsAiSoapIn" />
+      <wsdl:output message="tns:IsAiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionCash">
+      <wsdl:input message="tns:GetSessionCashSoapIn" />
+      <wsdl:output message="tns:GetSessionCashSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerDeckNum">
+      <wsdl:input message="tns:GetPlayerDeckNumSoapIn" />
+      <wsdl:output message="tns:GetPlayerDeckNumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLog">
+      <wsdl:input message="tns:GetLogSoapIn" />
+      <wsdl:output message="tns:GetLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVariation">
+      <wsdl:input message="tns:GetVariationSoapIn" />
+      <wsdl:output message="tns:GetVariationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralHandMonim">
+      <wsdl:input message="tns:GetGeneralHandMonimSoapIn" />
+      <wsdl:output message="tns:GetGeneralHandMonimSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserHandMonim">
+      <wsdl:input message="tns:GetUserHandMonimSoapIn" />
+      <wsdl:output message="tns:GetUserHandMonimSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralGamesLog">
+      <wsdl:input message="tns:GetGeneralGamesLogSoapIn" />
+      <wsdl:output message="tns:GetGeneralGamesLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGamesLog">
+      <wsdl:input message="tns:GetUserGamesLogSoapIn" />
+      <wsdl:output message="tns:GetUserGamesLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input message="tns:DeleteUserSoapIn" />
+      <wsdl:output message="tns:DeleteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseConnection">
+      <wsdl:input message="tns:CloseConnectionSoapIn" />
+      <wsdl:output message="tns:CloseConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testSoapIn" />
+      <wsdl:output message="tns:testSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PokerasmxSoap" type="tns:PokerasmxSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPlayerCash">
+      <soap:operation soapAction="http://tempuri.org/GetPlayerCash" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPlayer">
+      <soap:operation soapAction="http://tempuri.org/addPlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinPokerAISession">
+      <soap:operation soapAction="http://tempuri.org/joinPokerAISession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="game">
+      <soap:operation soapAction="http://tempuri.org/game" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap:operation soapAction="http://tempuri.org/StartGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Fold">
+      <soap:operation soapAction="http://tempuri.org/Fold" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CallOrRaise">
+      <soap:operation soapAction="http://tempuri.org/CallOrRaise" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check">
+      <soap:operation soapAction="http://tempuri.org/Check" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWinner">
+      <soap:operation soapAction="http://tempuri.org/GetWinner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionCards">
+      <soap:operation soapAction="http://tempuri.org/GetSessionCards" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerCards">
+      <soap:operation soapAction="http://tempuri.org/GetPlayerCards" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAi">
+      <soap:operation soapAction="http://tempuri.org/IsAi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionCash">
+      <soap:operation soapAction="http://tempuri.org/GetSessionCash" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerDeckNum">
+      <soap:operation soapAction="http://tempuri.org/GetPlayerDeckNum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLog">
+      <soap:operation soapAction="http://tempuri.org/GetLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVariation">
+      <soap:operation soapAction="http://tempuri.org/GetVariation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralHandMonim">
+      <soap:operation soapAction="http://tempuri.org/GetGeneralHandMonim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserHandMonim">
+      <soap:operation soapAction="http://tempuri.org/GetUserHandMonim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralGamesLog">
+      <soap:operation soapAction="http://tempuri.org/GetGeneralGamesLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGamesLog">
+      <soap:operation soapAction="http://tempuri.org/GetUserGamesLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseConnection">
+      <soap:operation soapAction="http://tempuri.org/CloseConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PokerasmxSoap12" type="tns:PokerasmxSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPlayerCash">
+      <soap12:operation soapAction="http://tempuri.org/GetPlayerCash" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPlayer">
+      <soap12:operation soapAction="http://tempuri.org/addPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinPokerAISession">
+      <soap12:operation soapAction="http://tempuri.org/joinPokerAISession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="game">
+      <soap12:operation soapAction="http://tempuri.org/game" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Fold">
+      <soap12:operation soapAction="http://tempuri.org/Fold" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CallOrRaise">
+      <soap12:operation soapAction="http://tempuri.org/CallOrRaise" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check">
+      <soap12:operation soapAction="http://tempuri.org/Check" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWinner">
+      <soap12:operation soapAction="http://tempuri.org/GetWinner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionCards">
+      <soap12:operation soapAction="http://tempuri.org/GetSessionCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerCards">
+      <soap12:operation soapAction="http://tempuri.org/GetPlayerCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAi">
+      <soap12:operation soapAction="http://tempuri.org/IsAi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionCash">
+      <soap12:operation soapAction="http://tempuri.org/GetSessionCash" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerDeckNum">
+      <soap12:operation soapAction="http://tempuri.org/GetPlayerDeckNum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLog">
+      <soap12:operation soapAction="http://tempuri.org/GetLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVariation">
+      <soap12:operation soapAction="http://tempuri.org/GetVariation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralHandMonim">
+      <soap12:operation soapAction="http://tempuri.org/GetGeneralHandMonim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserHandMonim">
+      <soap12:operation soapAction="http://tempuri.org/GetUserHandMonim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeneralGamesLog">
+      <soap12:operation soapAction="http://tempuri.org/GetGeneralGamesLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGamesLog">
+      <soap12:operation soapAction="http://tempuri.org/GetUserGamesLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseConnection">
+      <soap12:operation soapAction="http://tempuri.org/CloseConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap12:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Pokerasmx">
+    <wsdl:port name="PokerasmxSoap" binding="tns:PokerasmxSoap">
+      <soap:address location="http://localhost:50385/Pokerasmx.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PokerasmxSoap12" binding="tns:PokerasmxSoap12">
+      <soap12:address location="http://localhost:50385/Pokerasmx.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

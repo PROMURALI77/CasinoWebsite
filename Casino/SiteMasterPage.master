@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteMasterPage.master.cs" Inherits="SiteMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Hadad's Casino</title>
+    <link href="StyleSheets/MasterStyleSheet.css" rel="stylesheet" />
+    <link rel="icon" href="Images/TabPicture.ico" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body style="background-image: url(/Images/SiteBackground.jpg)">
+
+    <form runat="server">
+        <div class="nav updiv" style="background-image: url(/Images/MenuBackground.jpg);">
+            <ul>
+                <li><a href="HomePage.aspx">HomePage</a></li>
+                <li><a href="Games.aspx">Games</a></li>
+                <li><a href="Statistics.aspx">Statistics</a></li>                
+                <li><a href="AboutPage.aspx">About</a></li>
+                <li><a href="Contact.aspx">Contact</a></li>
+                <li>
+                    <asp:ScriptManager runat="server" ID="sm">
+                    </asp:ScriptManager>
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <button id="SignIn_Btn1" style="background-image: url(/Images/MenuBackground.jpg); right: 0; border: none; position: absolute" class="Button" runat="server">Sign in</button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:LinkButton ID="Name_Lbl" runat="server" Text="" CssClass="SignInLabel" Style="margin-top: 0px; top: 0" onclick="Name_Lbl_Click"></asp:LinkButton>
+                    <asp:Label ID="Cash_Lbl" runat="server" Text="" CssClass="SignInLabel" Style="margin-top: 15px;color:white"></asp:Label>
+                </li>
+            </ul>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <div style="text-align: center">
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+        <div id="SigningModal" class="modal" runat="server">
+
+            <div class="modal-content" runat="server">
+                <span class="close">&times;</span>
+                <br />
+                <asp:TextBox ID="UserName_Email_TB" runat="server" placeholder="UserName/Email" CssClass="input"></asp:TextBox>
+                <br />
+                <asp:RequiredFieldValidator ID="UserName_Email_RFV" runat="server" ErrorMessage="Missin UserName/Email" ControlToValidate="UserName_Email_TB" EnableClientScript="False" ValidationGroup="SignInGroup"></asp:RequiredFieldValidator>
+                <br />
+                <asp:TextBox ID="Password_TB" runat="server" placeholder="Password" type="password" CssClass="input"></asp:TextBox>
+                <br />
+                <asp:RequiredFieldValidator ID="Password_RFV" runat="server" ErrorMessage="Missing Password" ControlToValidate="Password_TB" EnableClientScript="False" ValidationGroup="SignInGroup"></asp:RequiredFieldValidator>
+                <asp:Label ID="SignIn_Lbl" runat="server" Text=""></asp:Label>
+                <br />
+                <asp:Button ID="SignIn_Btn2" runat="server" CssClass="Button" Text="Sign In" OnClick="SignIn_Btn2_Click"></asp:Button>
+                <br />
+                <a href="RegistraionPage.aspx">Not registerd yet?</a>
+            </div>
+
+
+        </div>
+    </form>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('SigningModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("SignIn_Btn1");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function OpenBlock() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            location.reload();
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

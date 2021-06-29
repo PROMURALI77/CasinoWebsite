@@ -1,0 +1,40 @@
+﻿.body {
+    text-align: center;
+}
+
+input {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid blue;
+    text-align: center;
+    font-family: Arial;
+    /*display: none;*/
+}
+
+.validator {
+    /*display: none;*/
+}
+
+.Button {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+a.LabelButton {
+    color: #000000;
+    text-decoration: none;
+}
+
+    a.LabelButton:hover {
+        text-decoration: none;
+    }

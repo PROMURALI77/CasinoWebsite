@@ -1,0 +1,150 @@
+﻿body {
+    text-align: center;
+}
+
+@font-face {
+    font-family: 'CasinoFont';
+    src: url('../Fonts/CoffeeTin Initials.ttf') format('truetype');
+}
+
+.updiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+.ContentDiv {
+    width:80%;
+    background-color:black;
+    opacity:1;
+    color:white; 
+    min-height:300px;
+    display:inline-block;
+    font-size:20px;
+}
+.LeftElement {
+    float: left;
+    width: 40%;
+    text-align: left;
+    margin-left:50px;
+    margin-top:5px;
+}
+.RightElement {
+    float: right;
+    width: 40%;
+    text-align: left;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.nav {
+    right: 0;
+    left: 0;
+}
+    .nav ul {
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+    .nav li {
+        font-family: CasinoFont, sans-serif;
+        font-size: 1.2em;
+        line-height: 40px;
+        height: 40px;
+        border-bottom: 1px solid #888;
+    }
+    .nav a {
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        transition: .3s background-color;
+    }
+        .nav a:hover {
+            background-color: #005f5f;
+        }
+        .nav a.active {
+            background-color: #fff;
+            color: #444;
+            cursor: default;
+        }
+
+@media screen and (min-width: 600px) {
+    .nav li {
+        width: 200px;
+        border-bottom: none;
+        height: 50px;
+        line-height: 50px;
+        font-size: 35px;
+    }
+    .nav li {
+        display: inline-block;
+        margin-right: -1px;
+    }
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+.Button {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    font-family: Corbel;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    bottom: 0;
+}
+.input {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid blue;
+    text-align: left;
+    font-family: Arial;
+    display:inline-block;
+}
+.SignInLabel {
+    right: 0;
+    position: absolute;
+    display: none;
+    font-family: Miriam;
+    font-size:20px;    
+}
